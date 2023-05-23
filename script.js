@@ -7,9 +7,11 @@ let masterPlay = document.getElementById('masterPlay');
 let myProgressBar = document.getElementById('myProgressBar');
 let gif = document.getElementById('gif');
 let masterSongName = document.getElementById('masterSongName');
+
+// songItems is a array
 let songItems = document.querySelectorAll('.songItem');
 
-// 
+// prev/next 
 let prev=document.getElementById('prev');
 let next=document.getElementById('next');
 
@@ -55,11 +57,12 @@ audioElement.addEventListener('timeupdate', ()=>{
     progress = parseInt((audioElement.currentTime/audioElement.duration)* 100); 
     myProgressBar.value = progress;
 })
-
+// click able seekbar 
 myProgressBar.addEventListener('change', ()=>{
     audioElement.currentTime = myProgressBar.value * audioElement.duration/100;
 })
 
+//  change the all icon when one song is selected
 const makeAllPlays = ()=>{
     document.querySelectorAll('.songItemPlay').forEach((element)=>{
         element.classList.remove('fa-pause-circle');
@@ -67,22 +70,30 @@ const makeAllPlays = ()=>{
     })
 }
 
+// select the item  in the form of array querySelectorAll 
 document.querySelectorAll('.songItemPlay').forEach((element)=>{
+
+    // clickable icon one by one
     element.addEventListener('click', (e)=>{ 
-        makeAllPlays();
+        makeAllPlays();   // line no 64
         songIndex = parseInt(e.target.id);
-        e.target.classList.remove('fa-play-circle');
+        // change the icon of play
+        e.target.classList.remove('fa-play-circle');  
         e.target.classList.add('fa-pause-circle');
+        // play the song which is selected
         audioElement.src = `songs/${songIndex}.mp3`;
         masterSongName.innerText = songs[songIndex-1].songName;
         audioElement.currentTime = 0;
         audioElement.play();
+
         gif.style.opacity = 1;
+        // change the icon of masterplay
         masterPlay.classList.remove('fa-play-circle');
         masterPlay.classList.add('fa-pause-circle');
     })
 })
 
+// click the next/prev icon song get changes
 next.addEventListener('click', ()=>{
     if(songIndex>=11){
         songIndex = 1
@@ -90,16 +101,20 @@ next.addEventListener('click', ()=>{
     else{
         songIndex += 1;
     }
-    console.log(songIndex);
+    // console.log(songIndex);
+
     audioElement.src = `songs/${songIndex}.mp3`;
     masterSongName.innerText = songs[songIndex-1].songName;
     audioElement.currentTime = 0;
     audioElement.play();
+
     masterPlay.classList.remove('fa-play-circle');
     masterPlay.classList.add('fa-pause-circle');
+
     gif.style.opacity=1;
 })
 
+// click the next/prev icon song get changes
 prev.addEventListener('click', ()=>{
     if(songIndex<=1){
         songIndex =11
@@ -113,6 +128,7 @@ prev.addEventListener('click', ()=>{
     masterSongName.innerText = songs[songIndex-1].songName;
     audioElement.currentTime = 0;
     audioElement.play();
+
     masterPlay.classList.remove('fa-play-circle');
     masterPlay.classList.add('fa-pause-circle');
     
