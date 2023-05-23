@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 body{
     background-color: antiquewhite;
-    /* overflow: ; */
+    
 }
 body::-webkit-scrollbar{
     width: 0px;
@@ -133,11 +133,14 @@ nav ul li{
     transition: opacity 1s ease-in;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 760px) {
     body {
-      background-color: red;
+      background-color:rgb(159, 202, 240) ;
     }
     .songList{
         width: 100%;
+    }
+    .masterSongName{
+        display: block;
     }
 }
